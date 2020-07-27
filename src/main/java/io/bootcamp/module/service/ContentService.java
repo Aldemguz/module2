@@ -1,9 +1,15 @@
 package io.bootcamp.module.service;
 
 import static io.bootcamp.module.constants.ResponseMessage.ERROR_RESTTEMPLATE_CALL;
+import static io.bootcamp.module.constants.Constants.WORD_PATTERN;
+import static io.bootcamp.module.constants.Constants.WORD_KEY;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
+import org.jsoup.Jsoup;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -19,6 +25,7 @@ import io.bootcamp.module.repository.ContentRepository;
 
 @Service
 public class ContentService {
+	private static final Logger logger = LoggerFactory.getLogger(ContentService.class);
 
 	@Autowired
 	private ContentRepository contentRepository;
@@ -42,9 +49,11 @@ public class ContentService {
 	}
 
 	public boolean checkContent(String url, String word) {
-		String page = this.callUrl(url);
+		String page = this.callUrl(url);	
+		logger.info("searching word: '{}' in page: {}", word, url);
 
-		return page.contains(word);
+		return Pattern.compile(WORD_PATTERN.replace(WORD_KEY, word), Pattern.CASE_INSENSITIVE)
+				.matcher(page).find();
 	}
 
 	public List<Content> getAllAuthorized(){
@@ -56,8 +65,8 @@ public class ContentService {
 		HttpEntity<?> request = new HttpEntity<>(this.setHeaders());
 
 		try {
-			return restTemplate.exchange(url,
-					HttpMethod.GET, request, String.class ).getBody();
+			return Jsoup.parse(restTemplate.exchange(url,
+					HttpMethod.GET, request, String.class ).getBody()).text();
 
 		}catch (Exception exception){
 
