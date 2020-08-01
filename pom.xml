@@ -19,6 +19,29 @@
 		<java.version>11</java.version>
 	</properties>
 
+	<profiles>
+		<!-- Development profile -->
+		<profile>
+			<id>development</id>
+			<properties>
+				<webpackMode>-d</webpackMode>
+				<webpackFile>webpack.dev.js</webpackFile>
+			</properties>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+
+		<!-- Production profile -->
+		<profile>
+			<id>production</id>
+			<properties>
+				<webpackMode>-p</webpackMode>
+				<webpackFile>webpack.prod.js</webpackFile>
+			</properties>
+		</profile>
+	</profiles>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -64,6 +87,14 @@
 			<artifactId>jsoup</artifactId>
 			<version>1.13.1</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -100,6 +131,59 @@
 						<goals>
 							<goal>report</goal>
 						</goals>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>com.github.eirslett</groupId>
+				<artifactId>frontend-maven-plugin</artifactId>
+				<version>1.7.6</version>
+				<configuration>
+					<installDirectory>target</installDirectory>
+					<environmentVariables>
+						<TEST_REPORT_PATH>${project.build.directory}</TEST_REPORT_PATH>
+					</environmentVariables>
+				</configuration>
+				<executions>
+					<execution>
+						<id>install-node-and-yarn</id>
+						<goals>
+							<goal>install-node-and-yarn</goal>
+						</goals>
+						<configuration>
+							<nodeVersion>v10.16.0</nodeVersion>
+							<yarnVersion>v1.16.0</yarnVersion>
+						</configuration>
+					</execution>
+					<execution>
+						<id>yarn-install</id>
+						<goals>
+							<goal>yarn</goal>
+						</goals>
+						<configuration>
+							<arguments>install</arguments>
+						</configuration>
+					</execution>
+					<execution>
+						<id>webpack-build</id>
+						<goals>
+							<goal>webpack</goal>
+						</goals>
+						<configuration>
+							<arguments>--config ${webpackFile} ${webpackMode}
+								--env.version=${project.version}</arguments>
+						</configuration>
+					</execution>
+					<execution>
+						<id>yarn test</id>
+						<phase>test</phase>
+						<goals>
+							<goal>yarn</goal>
+						</goals>
+						<configuration>
+							<arguments>test</arguments>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>

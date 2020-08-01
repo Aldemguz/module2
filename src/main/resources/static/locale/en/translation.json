@@ -1,0 +1,18 @@
+{
+  "version": "Version",
+  "none": "None",
+  "homeView": {
+    "checkContent": "Check Content Page",
+    "authorizedList": "Get Authorized content list"
+  },
+  "searchButton": "Search Word",
+  "validator": {
+    "required": "This field is required",
+    "maxLength": "The max length on the field is: {{number}}",
+    "isUrl": "Error in Url Format"
+  },
+  "contentList": {
+    "isEmpty": "THERE ARE NO AUTHORIZED PAGES YET"
+  },
+  "somethingWrong": "Error Retrieving response"
+}

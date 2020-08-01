@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AppVersion Component Test Snapshot AppVersion 1`] = `
+<Connect(withI18nextTranslation(AppVersion))>
+  <div>
+    version
+    : 
+    1.0.0
+  </div>
+</Connect(withI18nextTranslation(AppVersion))>
+`;
+
+exports[`AppVersion Component Test Snapshot AppVersion with appInfo null 1`] = `
+<Connect(withI18nextTranslation(AppVersion))>
+  <div>
+    version
+    : 
+    none
+  </div>
+</Connect(withI18nextTranslation(AppVersion))>
+`;
