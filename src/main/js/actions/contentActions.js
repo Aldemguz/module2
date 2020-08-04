@@ -7,7 +7,7 @@ import {
 import { setNotificationError } from "bucares/actions/notificationActions";
 import i18n from "bucares/i18n"
 
-const setUrl = (accepted) => ({
+export const setUrl = (accepted) => ({
   type: actionTypes.SET_URL,
   accepted
 });
@@ -16,12 +16,12 @@ export const cleanContent = () => ({
   type: actionTypes.CLEAN_CONTENT
 })
 
-const setContentsList = (list) => ({
+export const setContentsList = (list) => ({
   type: actionTypes.SET_CONTENT_LIST,
   list
 })
 
-const deleteContentFromList = (url) => ({
+export const deleteContentFromList = (url) => ({
   type: actionTypes.DELETE_CONTENT_FROM_LIST,
   url
 })
@@ -60,7 +60,8 @@ export const deleteContent = (payload) => (
         }
       }).then(response => {
         dispatch(deleteContentFromList(response.data.data.url));
-    }).catch(() => {
+    }).catch((error) => {
+      console.log(error);
     })
   }
 );

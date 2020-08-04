@@ -14,14 +14,6 @@ export class ContentList extends React.Component {
     super(props);
   }
 
-  handleDelete = (url) => {
-    const payload = {
-      "url": url
-    }
-    this.props.deleteContent(payload);
-  }
-  
-
   componentDidMount(){
     this.props.getContents();
   }

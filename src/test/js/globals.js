@@ -7,8 +7,15 @@ import toJson from 'enzyme-to-json';
 import {I18nextProvider} from "react-i18next";
 import {Provider} from "react-redux";
 import i18n from "./i18n";
+import withStyles from "./utils/withStyles";
 
 Enzyme.configure({ adapter: new Adapter() });
+
+// Mock I18next
+jest.mock('../../main/js/i18n', () => {
+    return require("./i18n");
+  });
+  
 
 // Global enzyme
 global.shallow = shallow;
@@ -40,5 +47,10 @@ global.withProvider= (fn, store) => (
 );
 
 global.globalWrapper = (fn, store) => (
-    withProvider(withI18n(fn), store)
-);
+    withProvider(
+      withI18n(
+        withStyles(fn)
+      ),
+      store
+  )
+  );

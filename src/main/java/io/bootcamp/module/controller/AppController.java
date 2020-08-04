@@ -27,11 +27,11 @@ public class AppController {
 	public String index() {
 		return "index";
 	}
-	
-	 @GetMapping(HEALTH_ENDPOINT_URL)
-	    public String health() {
-	        return "redirect:/";
-	    }
+
+	@GetMapping(HEALTH_ENDPOINT_URL)
+	public String health() {
+		return "redirect:/";
+	}
 
 	@GetMapping(APP_VERSION_URL)
 	@ResponseBody
