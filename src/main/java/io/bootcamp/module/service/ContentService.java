@@ -5,7 +5,6 @@ import static io.bootcamp.module.constants.Constants.WORD_PATTERN;
 import static io.bootcamp.module.constants.Constants.WORD_KEY;
 
 import java.util.List;
-import java.util.regex.Pattern;
 
 import org.jsoup.Jsoup;
 import org.slf4j.Logger;
@@ -49,11 +48,10 @@ public class ContentService {
 	}
 
 	public boolean checkContent(String url, String word) {
-		String page = this.callUrl(url);	
+		String page = this.callUrl(url).toLowerCase();	
 		logger.info("searching word: '{}' in page: {}", word, url);
-
-		return Pattern.compile(WORD_PATTERN.replace(WORD_KEY, word), Pattern.CASE_INSENSITIVE)
-				.matcher(page).find();
+		
+		return page.matches(WORD_PATTERN.replace(WORD_KEY, word.toLowerCase()));
 	}
 
 	public List<Content> getAllAuthorized(){
