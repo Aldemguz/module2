@@ -16,6 +16,7 @@ import {
     LOADER_HEIGHT,
     LOADER_WIDTH
   } from "bucares/constants/loaderStyles";
+import {Content} from 'bucares/models/Content';
 
 export class SearchView extends React.Component {
 
@@ -38,12 +39,9 @@ export class SearchView extends React.Component {
 
     handleSubmit = async () => {
         const { url, word} = this.state;
-        var content = {
-            "url": url,
-            "word": word
-        }
+
         this.setState({isLoading:true});
-        await this.props.checkContent(content);
+        await this.props.checkContent(new Content({ url, word }));
         this.setState({isLoading:false});
     };
 

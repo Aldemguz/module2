@@ -14,8 +14,9 @@ export class Content extends React.Component {
 
   handleDelete = (url) => {
     const payload = {
-      "url": url
+      url
     }
+
     this.props.deleteContent(payload);
   }
 
