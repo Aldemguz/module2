@@ -10,6 +10,10 @@ import ContentList from 'bucares/components/ContentList';
 import Grid from '@material-ui/core/Grid';
 import TabPanel from 'bucares/components/TabPanel';
 import { withTranslation } from 'react-i18next';
+import { getPropertiesInfo } from "bucares/actions/propertiesActions";
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Typography } from '@material-ui/core';
 
 export class HomeView extends React.Component { 
   constructor(props) {
@@ -19,15 +23,29 @@ export class HomeView extends React.Component {
     };
   }
 
+  componentDidMount(){
+    if (!this.props.properties.propertiesInfoLoading){
+      this.props.getPropertiesInfo();
+  }
+  }
+
   handleChange = (event, newValue) => {
     this.setState({value: newValue});
   };
 
   render(){
     const { value } = this.state;
-    const { classes, t } = this.props;
+    const { classes, t, properties } = this.props;
     return (
       <Grid container className={classes.box}>
+        <Grid item xs={12} className={classes.tag}>
+          <Typography
+            variant='inherit'
+            color='textSecondary'
+          >
+            {t("homeView.appTag", {tag: properties.propertiesInfo.appTag} )}
+          </Typography>
+        </Grid>
         <AppBar position="static" >
           <Tabs
             value={value}
@@ -56,7 +74,15 @@ function a11yProps(index) {
   };
 }
 
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+      getPropertiesInfo
+  }, dispatch)
+}
+
 export default compose(
+  connect((store) => ({properties: store.get("properties")}),
+        mapDispatchToProps),
   withTranslation("translation"),
   withStyles(styles)
 )(HomeView);

@@ -7,6 +7,11 @@ const store = mockStore({
       content: {
         urlAcceptedList: ["test1", "test2"],
         currentUrlIsAccepted: "accepted_test"
+      },
+      properties: {
+        propertiesInfo: {
+          appTag: 'test'
+        }
       }
     };
     return reducers[property];

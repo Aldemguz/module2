@@ -9,13 +9,27 @@
 		<version>2.3.1.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
+
 	<groupId>io.bootcamp</groupId>
 	<artifactId>content-filter</artifactId>
 	<version>0-SNAPSHOT</version>
-	<name>module</name>
 	<description>Test module 2 project for Spring Boot</description>
 
 	<properties>
+      <!-- Project properties -->
+    <product.name>content-filter</product.name>
+		<product.description>A project of spring-boot with react-redux</product.description>
+		<log.file>/opt/content-filter/logs/app.log</log.file>
+
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>11</java.version>
+		<tomcat.version>9.0.27</tomcat.version>
+
+		<!-- Docker properties -->
+		<docker.image>content-filter</docker.image>
+		<docker.username>${env.DOCKER_USER}</docker.username>
+		<docker.password>${env.DOCKER_PASSWORD}</docker.password>
+		<docker.repository>${env.DOCKER_REPOSITORY}</docker.repository>
 		<java.version>11</java.version>
 	</properties>
 
@@ -95,6 +109,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
+		<dependency>
+      		<groupId>mysql</groupId>
+        	<artifactId>mysql-connector-java</artifactId>
+    </dependency>
 	</dependencies>
 
 	<build>
@@ -184,6 +202,48 @@
 						<configuration>
 							<arguments>test</arguments>
 						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>docker-maven-plugin</artifactId>
+				<version>0.33.0</version>
+				<configuration>
+          <images>
+						<image>
+							<name>${project.name}</name>
+							<registry>${docker.repository}</registry>
+							<build>
+								<contextDir>${project.basedir}</contextDir>
+								<args>
+									<JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
+								</args>
+								<tags>
+									<tag>${project.version}</tag>
+								</tags>
+							</build>
+						</image>
+					</images>
+					<authConfig>
+						<username>${docker.username}</username>
+						<password>${docker.password}</password>
+					</authConfig>
+				</configuration>
+				<executions>
+					<execution>
+						<id>docker-build</id>
+						<phase>package</phase>
+						<goals>
+							<goal>build</goal>
+						</goals>
+					</execution>
+					<execution>
+						<id>docker-push</id>
+						<phase>deploy</phase>
+						<goals>
+							<goal>push</goal>
+						</goals>
 					</execution>
 				</executions>
 			</plugin>

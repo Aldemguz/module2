@@ -1,6 +1,7 @@
 package io.bootcamp.module.controller;
 
 import static io.bootcamp.module.constants.URLConstants.HEALTH_ENDPOINT_URL;
+import static io.bootcamp.module.constants.URLConstants.API_GET_PROPERTIES_URL;
 import static io.bootcamp.module.constants.URLConstants.APP_VERSION_URL;
 
 import java.util.HashMap;
@@ -15,6 +16,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import io.bootcamp.module.pojo.ModuleProperties;
+import io.bootcamp.module.utilities.Response;
+
 @Controller
 public class AppController {
 
@@ -22,6 +26,9 @@ public class AppController {
 
 	@Value("${build.version}")
 	private String buildVersion;
+
+	@Value("${app.tag}")
+	private String appTag;
 
 	@GetMapping("/")
 	public String index() {
@@ -41,6 +48,17 @@ public class AppController {
 
 		Map<String, String> response = new HashMap<>();
 		response.put("version", buildVersion);
+
+		return new ResponseEntity<>(response, HttpStatus.OK);
+	}
+
+	@GetMapping(API_GET_PROPERTIES_URL)
+	@ResponseBody
+	public ResponseEntity<Object> getProperties() {
+		logger.info("Called resource: getProperties");
+		ModuleProperties properties = new ModuleProperties(appTag);
+
+		Response<Object> response = new Response<>(properties, null);
 
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}

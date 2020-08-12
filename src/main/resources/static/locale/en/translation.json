@@ -3,7 +3,8 @@
   "none": "None",
   "homeView": {
     "checkContent": "Check Content Page",
-    "authorizedList": "Get Authorized content list"
+    "authorizedList": "Get Authorized content list",
+    "appTag": "App Tag: {{tag}}"
   },
   "searchButton": "Search Word",
   "validator": {

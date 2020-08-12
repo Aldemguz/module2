@@ -7,9 +7,13 @@ const styles = {
     border: "1px solid #CFCFCF",
     padding: "10px 50px 62px 50px",
     margin: "auto",
-    alignContent: "center"
+    alignContent: "center",
+    position: "relative"
   },
   header: {
+    marginBottom: "10px"
+  },
+  tag: {
     marginBottom: "10px"
   }
 }
