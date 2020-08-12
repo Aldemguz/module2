@@ -1,0 +1,33 @@
+version: '3.5'
+services:
+    content-mysql:
+        image: mysql:8.0.19
+        container_name: content-filter-mysql
+        environment:
+            - MYSQL_ROOT_PASSWORD=1234
+            - MYSQL_DATABASE=content
+            - MYSQL_USER=bucares
+            - MYSQL_PASSWORD=1234
+        command: --default-authentication-plugin=mysql_native_password
+    app1:
+        image: ${DOCKER_REPOSITORY}/content-filter
+        container_name : app1
+        restart: always
+        volumes:
+            - ./compose/instance-a/config:/opt/content-filter/content-filter
+    app2:
+        image: ${DOCKER_REPOSITORY}/content-filter
+        container_name : app2
+        restart: always
+        volumes:
+            - ./compose/instance-b/config:/opt/content-filter/content-filter
+
+    nginx:
+        image: nginx:alpine
+        volumes:
+            - ./compose/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+        links:
+            - app1
+            - app2
+        ports:
+            - "80:80"
