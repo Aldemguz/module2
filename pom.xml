@@ -31,6 +31,14 @@
 		<docker.password>${env.DOCKER_PASSWORD}</docker.password>
 		<docker.repository>${env.DOCKER_REPOSITORY}</docker.repository>
 		<java.version>11</java.version>
+
+		<!-- Sonar Properties -->
+		<sonar.projectName>${product.name}</sonar.projectName>
+		<sonar.projectKey>${project.groupId}:${project.artifactId}</sonar.projectKey>
+		<sonar.projectVersion>${project.version}</sonar.projectVersion>
+		<sonar.sources>src/main/js,src/main/java</sonar.sources>
+		<sonar.javascript.lcov.reportPaths>target/coverage/lcov.info</sonar.javascript.lcov.reportPaths>
+		<sonar.coverage.jacoco.xmlReportPaths>target/site/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
 	</properties>
 
 	<distributionManagement>
@@ -125,6 +133,11 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.sonarsource.scanner.maven</groupId>
+				<artifactId>sonar-maven-plugin</artifactId>
+				<version>3.7.0.1746</version>
+			</plugin>
+			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
@@ -212,11 +225,12 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!--  <plugin>
+			<plugin>
 				<groupId>io.fabric8</groupId>
 				<artifactId>docker-maven-plugin</artifactId>
 				<version>0.33.0</version>
 				<configuration>
+				<skipPush>true</skipPush>
 					<images>
 						<image>
 							<name>${project.name}</name>
@@ -253,7 +267,7 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>-->
+			</plugin>
 		</plugins>
 	</build>
 
