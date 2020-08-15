@@ -16,8 +16,8 @@
 	<description>Test module 2 project for Spring Boot</description>
 
 	<properties>
-      <!-- Project properties -->
-    <product.name>content-filter</product.name>
+		<!-- Project properties -->
+		<product.name>content-filter</product.name>
 		<product.description>A project of spring-boot with react-redux</product.description>
 		<log.file>/opt/content-filter/logs/app.log</log.file>
 
@@ -32,6 +32,13 @@
 		<docker.repository>${env.DOCKER_REPOSITORY}</docker.repository>
 		<java.version>11</java.version>
 	</properties>
+
+	<distributionManagement>
+		<snapshotRepository>
+			<id>repo_test</id>
+			<url>${env.TEST_SNAPSHOTS_REPOSITORY_URL}</url>
+		</snapshotRepository>
+	</distributionManagement>
 
 	<profiles>
 		<!-- Development profile -->
@@ -110,9 +117,9 @@
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
 		<dependency>
-      		<groupId>mysql</groupId>
-        	<artifactId>mysql-connector-java</artifactId>
-    </dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -205,12 +212,12 @@
 					</execution>
 				</executions>
 			</plugin>
-			<plugin>
+			<!--  <plugin>
 				<groupId>io.fabric8</groupId>
 				<artifactId>docker-maven-plugin</artifactId>
 				<version>0.33.0</version>
 				<configuration>
-          <images>
+					<images>
 						<image>
 							<name>${project.name}</name>
 							<registry>${docker.repository}</registry>
@@ -246,7 +253,7 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin>-->
 		</plugins>
 	</build>
 
