@@ -225,12 +225,11 @@
 					</execution>
 				</executions>
 			</plugin>
-			<!--<plugin>
+			<plugin>
 				<groupId>io.fabric8</groupId>
 				<artifactId>docker-maven-plugin</artifactId>
 				<version>0.33.0</version>
 				<configuration>
-				<skipPush>true</skipPush>
 					<images>
 						<image>
 							<name>${project.name}</name>
@@ -267,7 +266,7 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>-->
+			</plugin>
 		</plugins>
 	</build>
 
