@@ -2,6 +2,10 @@ FROM openjdk:11-jre
 
 ENTRYPOINT ["java", "-jar", "/opt/content-filter/content-filter.jar", "--spring.config.location=classpath:/application.properties,file:/opt/content-filter/content-filter/application.properties"]
 
+#Versioning the app
+ARG VERSION
+ENV APP_VERSION=$VERSION
+
 ARG JAR_FILE
 ADD target/${JAR_FILE} /opt/content-filter/content-filter.jar
 

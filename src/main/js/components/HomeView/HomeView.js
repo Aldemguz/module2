@@ -14,6 +14,7 @@ import { getPropertiesInfo } from "bucares/actions/propertiesActions";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Typography } from '@material-ui/core';
+import AppVersion from 'bucares/components/AppVersion';
 
 export class HomeView extends React.Component { 
   constructor(props) {
@@ -45,6 +46,7 @@ export class HomeView extends React.Component {
           >
             {t("homeView.appTag", {tag: properties.propertiesInfo.appTag} )}
           </Typography>
+          <AppVersion/>
         </Grid>
         <AppBar position="static" >
           <Tabs
