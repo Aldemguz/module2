@@ -12,6 +12,11 @@ const store = mockStore({
         propertiesInfo: {
           appTag: 'test'
         }
+      },
+      app: {
+        appInfo: {
+          version: 'test'
+        }
       }
     };
     return reducers[property];

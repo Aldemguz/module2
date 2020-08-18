@@ -88,8 +88,10 @@ exports[`HomeView Component Test Snapshot HomeView 1`] = `
           "languageChanged": Array [
             [Function],
             [Function],
+            [Function],
           ],
           "languageChanging": Array [
+            [Function],
             [Function],
             [Function],
           ],
@@ -4131,6 +4133,13 @@ exports[`HomeView Component Test Snapshot HomeView 1`] = `
                     </span>
                   </ForwardRef(Typography)>
                 </WithStyles(ForwardRef(Typography))>
+                <Connect(withI18nextTranslation(AppVersion))>
+                  <div>
+                    version
+                    : 
+                    test
+                  </div>
+                </Connect(withI18nextTranslation(AppVersion))>
               </div>
             </ForwardRef(Grid)>
           </WithStyles(ForwardRef(Grid))>
@@ -4984,8 +4993,10 @@ exports[`HomeView Component Test Snapshot HomeView 1`] = `
                               "languageChanged": Array [
                                 [Function],
                                 [Function],
+                                [Function],
                               ],
                               "languageChanging": Array [
+                                [Function],
                                 [Function],
                                 [Function],
                               ],
