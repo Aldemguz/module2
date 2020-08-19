@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import io.bootcamp.module.pojo.ModuleProperties;
 import io.bootcamp.module.utilities.Response;
 
+// TODO
 @Controller
 public class AppController {
 
@@ -40,6 +41,7 @@ public class AppController {
 		return "redirect:/";
 	}
 
+        // TODO
 	@GetMapping(APP_VERSION_URL)
 	@ResponseBody
 	public ResponseEntity<Map<String, String>> getVersion() {
@@ -52,9 +54,14 @@ public class AppController {
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
+        // TODO
 	@GetMapping(API_GET_PROPERTIES_URL)
 	@ResponseBody
 	public ResponseEntity<Object> getProperties() {
+		// TODO
+		logger.info("Called resource: getProperties");
+		logger.info("Called resource: getProperties");
+		logger.info("Called resource: getProperties");
 		logger.info("Called resource: getProperties");
 		ModuleProperties properties = new ModuleProperties(appTag);
 
