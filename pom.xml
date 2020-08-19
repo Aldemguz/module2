@@ -46,6 +46,10 @@
 			<id>repo_test</id>
 			<url>${env.TEST_SNAPSHOTS_REPOSITORY_URL}</url>
 		</snapshotRepository>
+		<repository>
+		<id>repo_test_releases</id>
+			<url>${env.TEST_RELEASES_REPOSITORY_URL}</url>
+		</repository>
 	</distributionManagement>
 
 	<profiles>
