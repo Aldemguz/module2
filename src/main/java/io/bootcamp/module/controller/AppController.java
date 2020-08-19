@@ -4,6 +4,7 @@ import static io.bootcamp.module.constants.URLConstants.HEALTH_ENDPOINT_URL;
 import static io.bootcamp.module.constants.URLConstants.API_GET_PROPERTIES_URL;
 import static io.bootcamp.module.constants.URLConstants.APP_VERSION_URL;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,6 +24,13 @@ import io.bootcamp.module.utilities.Response;
 @Controller
 public class AppController {
 
+	public String getUsersFile() {
+		File file = new File("/home/path/Dev/users.txt"); // Non-Compliant
+		return file.getName();
+	}
+	void doSomething() {
+		;                                                       // Noncompliant - was used as a kind of TODO marker
+	}
 	private static final Logger logger = LoggerFactory.getLogger(AppController.class);
 
 	@Value("${build.version}")
@@ -41,7 +49,7 @@ public class AppController {
 		return "redirect:/";
 	}
 
-        // TODO
+	// TODO
 	@GetMapping(APP_VERSION_URL)
 	@ResponseBody
 	public ResponseEntity<Map<String, String>> getVersion() {
@@ -54,7 +62,7 @@ public class AppController {
 		return new ResponseEntity<>(response, HttpStatus.OK);
 	}
 
-        // TODO
+	// TODO
 	@GetMapping(API_GET_PROPERTIES_URL)
 	@ResponseBody
 	public ResponseEntity<Object> getProperties() {
