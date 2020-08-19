@@ -267,6 +267,7 @@
 						<phase>deploy</phase>
 						<goals>
 							<goal>push</goal>
+							<goal>log</goal>
 						</goals>
 					</execution>
 				</executions>
