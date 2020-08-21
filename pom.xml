@@ -29,6 +29,8 @@
 		<docker.image>content-filter</docker.image>
 		<docker.username>${env.DOCKER_USER}</docker.username>
 		<docker.password>${env.DOCKER_PASSWORD}</docker.password>
+		<docker.nexus.username>${env.DOCKER_NEXUS_USER}</docker.nexus.username>
+		<docker.nexus.password>${env.DOCKER_NEXUS_PASSWORD}</docker.nexus.password>
 		<docker.repository>${env.DOCKER_REPOSITORY}</docker.repository>
 		<java.version>11</java.version>
 
@@ -268,6 +270,12 @@
 						<goals>
 							<goal>push</goal>
 						</goals>
+						<configuration>
+							<authConfig>
+								<username>${docker.nexus.username}</username>
+								<password>${docker.nexus.password}</password>
+							</authConfig>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
