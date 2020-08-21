@@ -251,10 +251,10 @@
 							</build>
 						</image>
 					</images>
-					<authConfig>
+					<!--<authConfig>
 						<username>${docker.username}</username>
 						<password>${docker.password}</password>
-					</authConfig>
+					</authConfig>-->
 				</configuration>
 				<executions>
 					<execution>
@@ -270,12 +270,12 @@
 						<goals>
 							<goal>push</goal>
 						</goals>
-						<configuration>
+						<!--<configuration>
 							<authConfig>
 								<username>${docker.nexus.username}</username>
 								<password>${docker.nexus.password}</password>
 							</authConfig>
-						</configuration>
+						</configuration>-->
 					</execution>
 				</executions>
 			</plugin>
