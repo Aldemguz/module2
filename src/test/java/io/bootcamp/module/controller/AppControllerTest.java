@@ -2,6 +2,7 @@ package io.bootcamp.module.controller;
 
 import static io.bootcamp.module.constants.URLConstants.APP_VERSION_URL;
 import static io.bootcamp.module.constants.URLConstants.HEALTH_ENDPOINT_URL;
+import static io.bootcamp.module.constants.URLConstants.API_GET_PROPERTIES_URL;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -51,5 +52,11 @@ public class AppControllerTest extends TestCase {
 		mvc.perform(get(HEALTH_ENDPOINT_URL))
 		.andExpect(view().name("redirect:/"))
 		.andExpect(status().isFound());
+	}
+
+	@Test
+	public void testGetProperties() throws Exception {
+		mvc.perform(get(API_GET_PROPERTIES_URL))
+		.andExpect(status().isOk());
 	}
 }

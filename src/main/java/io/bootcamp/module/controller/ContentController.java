@@ -28,7 +28,6 @@ import io.bootcamp.module.utilities.ContentResponse;
 import io.bootcamp.module.utilities.Response;
 import io.bootcamp.module.utilities.Utilities;
 
-// TODO
 @Controller
 public class ContentController {
 

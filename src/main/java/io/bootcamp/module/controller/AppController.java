@@ -4,7 +4,6 @@ import static io.bootcamp.module.constants.URLConstants.HEALTH_ENDPOINT_URL;
 import static io.bootcamp.module.constants.URLConstants.API_GET_PROPERTIES_URL;
 import static io.bootcamp.module.constants.URLConstants.APP_VERSION_URL;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
